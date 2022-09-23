@@ -1,47 +1,45 @@
-// compare choices
-// determine win, loss, or tie
-// repeat to determine winner of best of 5 series
+let playerScore = 0
+let computerScore = 0
 
-// generate computer choice
 function getComputerChoice() {
-    let computerSelection = Math.floor(Math.random()*3) +1;
-    if (computerSelection === 1) {
-        return ('rock');
-    } else if (computerSelection === 2) {
-        return ('paper');
+    let choices = ['rock', 'paper', 'scissors']
+    return choices[Math.floor(Math.random() * choices.length)]
+}
+
+function playRound() {
+    let result = ""
+    let playerSelection = prompt('Rock, Paper, or Scissors?').toLowerCase()
+    let computerSelection = getComputerChoice()
+    console.log(playerSelection)
+    console.log(computerSelection)
+   if (playerSelection != 'rock' && playerSelection != 'paper' && playerSelection != 'scissors') {
+    console.log('Please make a valid selection.')
+   } else if (playerSelection === computerSelection) { 
+    result = ('Tie! You both chose ' + playerSelection + ' Choose again.')
+    console.log(result)
+   } else if (
+    (playerSelection === 'rock' && computerSelection === 'scissors') ||
+    (playerSelection === 'paper' && computerSelection === 'rock') ||
+    (playerSelection === 'scissors' && computerSelection === 'paper')) {
+        playerScore += 1
+        result = ('You win! ' + playerSelection + ' beats ' + computerSelection + '.' + ' Player Score: ' + playerScore + ' Computer Score: ' + computerScore)
+        console.log(result)
     } else {
-        return ('scissors');
+        computerScore +=1
+        result = ('You lose! ' + computerSelection + ' beats ' + playerSelection + '.' + ' Player Score: ' + playerScore + ' Computer Score: ' + computerScore)
+        console.log(result)
     }
 }
 
-computerSelection = getComputerChoice()
-console.log(computerSelection)
-
-//get user choice
-let playerSelection = prompt('Rock, Paper, Scissors?')
-playerSelection = playerSelection.toLowerCase()
-
-console.log(playerSelection)
-
-function playRound(playerSelection, computerSelection) {
-    if (playerSelection === computerSelection) {
-        return ('Tie! Choose again.');
-    } else if (playerSelection === 'rock' && computerSelection === 'paper') {
-        return ('You lose! Paper beats rock.');
-    } else if (playerSelection === 'rock' && computerSelection === 'scissors') {
-        return ('You win! Rock beats scissors');
-    } else if (playerSelection === 'paper' && computerSelection === 'rock') {
-        return ('You win! Paper beats rock.');
-    } else if (playerSelection === 'paper' && computerSelection === 'scissors') {
-        return ('You lose! Scissors beat rock.') ;
-    } else if (playerSelection === 'scissors' && computerSelection === 'rock') {
-        return ('You lose! Rock beats scissors');
-    } else if (playerSelection === 'scissors' && computerSelection === 'paper') {
-        return ('You win! Scissors beat paper.');
-    } else {
-        return ('Please make a valid selection.')
+function game() {
+   while (playerScore < 5 && computerScore < 5) {
+    playRound()
+    if (playerScore === 5) {
+        console.log('Congratulations! You won the game ' + playerScore + '-' + computerScore + '! Refresh the page to play again.')
+    } else if (computerScore === 5) {
+        console.log('Bummer! You lost the game ' + computerScore + '-' + playerScore + '! Refresh the page to play again.')
     }
+   }
 }
 
-console.log(playRound(playerSelection, computerSelection))
-
+game()

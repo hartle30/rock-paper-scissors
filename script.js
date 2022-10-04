@@ -4,29 +4,18 @@ const userScore = document.getElementById('userScore');
 const cpuScore = document.getElementById('cpuScore');
 const result = document.getElementById('result');
 
-let playerScore = 0
-let computerScore = 0
-let playerSelection = ''
+let playerScore = 0;
+let computerScore = 0;
+let playerSelection = '';
 
-const rock = document.querySelector("#rock");
-rock.addEventListener('click', () => {
-    playerSelection = 'rock';
-    userSelectionDisplay.innerHTML = playerSelection;
-    playRound();
-});
-
-const paper = document.querySelector("#paper");
-paper.addEventListener('click', () => {
-    playerSelection = 'paper';
-    userSelectionDisplay.innerHTML = playerSelection;
-    playRound();
-});
-
-const scissors = document.querySelector("#scissors");
-scissors.addEventListener('click', () => {
-    playerSelection = 'scissors';
-    userSelectionDisplay.innerHTML = playerSelection;
-    playRound();
+const buttons = document.querySelectorAll('button');
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        playerSelection = button.id;
+        userSelectionDisplay.innerHTML = playerSelection.toUpperCase();
+        resetGame();
+        playRound();
+    });
 });
 
 function getComputerChoice() {
@@ -34,45 +23,38 @@ function getComputerChoice() {
     return choices[Math.floor(Math.random() * choices.length)]
 }
 
-function playRound() {
-    let computerSelection = getComputerChoice()
-    cpuSelectionDisplay.innerHTML = computerSelection;
-    console.log(playerSelection)
-    console.log(computerSelection)
-   if (playerSelection != 'rock' && playerSelection != 'paper' && playerSelection != 'scissors') {
-    console.log('Please make a valid selection.')
-   } else if (playerSelection === computerSelection) { 
-    result.innerHTML = ('Tie! You both chose ' + playerSelection + '.' + ' Choose again.')
-    console.log(result)
-   } else if (
-    (playerSelection === 'rock' && computerSelection === 'scissors') ||
-    (playerSelection === 'paper' && computerSelection === 'rock') ||
-    (playerSelection === 'scissors' && computerSelection === 'paper')) {
-        playerScore += 1;
+function resetGame() {
+    if (playerScore === 5 || computerScore === 5) {
+        playerScore = 0;
         userScore.innerHTML = playerScore;
-        result.innerHTML = ('You win! ' + playerSelection + ' beats ' + computerSelection + '.')
-        console.log(result)
+        computerScore = 0;
+        cpuScore.innerHTML = computerScore;
+    }
+}
+
+function playRound() {
+    let computerSelection = getComputerChoice();
+    cpuSelectionDisplay.innerHTML = computerSelection.toUpperCase();
+    if (playerSelection === computerSelection) { 
+        result.innerHTML = ('Tie! You both chose ' + playerSelection + '.' + ' Choose again.')
+    } else if (
+        (playerSelection === 'rock' && computerSelection === 'scissors') ||
+        (playerSelection === 'paper' && computerSelection === 'rock') ||
+        (playerSelection === 'scissors' && computerSelection === 'paper')) {
+            playerScore +=1;
+            userScore.innerHTML = playerScore;
+            if (playerScore === 5) {
+                result.innerHTML = ('Congratulations! You have beat the computer 5 to ' + computerScore + '.')
+            } else {
+                result.innerHTML = ('You win! ' + playerSelection + ' beats ' + computerSelection + '.')
+            }
     } else {
         computerScore +=1;
         cpuScore.innerHTML = computerScore;
-        result.innerHTML = ('You lose! ' + computerSelection + ' beats ' + playerSelection + '.')
-        console.log(result)
+        if (computerScore === 5) {
+            result.innerHTML = ('Bummer! You have lost to the computer 5 to ' + playerScore + '.')
+        } else {
+             result.innerHTML = ('You lose! ' + computerSelection + ' beats ' + playerSelection + '.')
+        }
     }
 }
-
-/*
-
-function game() {
-   while (playerScore < 5 && computerScore < 5) {
-    playRound()
-    if (playerScore === 5) {
-        console.log('Congratulations! You won the game ' + playerScore + '-' + computerScore + '! Refresh the page to play again.')
-    } else if (computerScore === 5) {
-        console.log('Bummer! You lost the game ' + computerScore + '-' + playerScore + '! Refresh the page to play again.')
-    }
-   }
-}
-
-game()
-
-*/

@@ -2,35 +2,47 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <link rel="stylesheet" href="style.css">
         <script src="script.js" defer></script>
         <title>Rock Paper Scissors</title>
     </head>
     <body>
+        <h1>Rock Paper Scissors</h1>
+
+        <h2>First to 5 wins!</h2>
+
         <div class="selections">
             <div class="selection">
-                User Selection:
-                <p id="userSelection"></p>
+                Player
+                <p class="userSelection"></p>
             </div>
+
             <div class="selection">
-                CPU Selection:
-                <p id="cpuSelection"></p>
+                Computer
+                <p class="cpuSelection"></p>
             </div>
         </div>
+
+        <div id="result"></div>
+
         <div class="scores">
-            <div class="user">
-                User Score:
+            <div class="score">
+                Player Score
                 <p id="userScore">0</p>
             </div>
-            <div class="cpu">
-                Computer Score:
+            <div class="score">
+                Computer Score
                 <p id="cpuScore">0</p>
             </div>
         </div>
+
         <div class="buttons">
-            <button id="rock">Rock</button>
-            <button id="paper">Paper</button>
-            <button id="scissors">Scissors</button>
+            <button id="rock">&#9994</button>
+            <button id="paper">&#9995</button>
+            <button id="scissors">&#9996</button>
         </div>
-        <div id="result"></div>
+
+
+
     </body>
 </html>

@@ -62,7 +62,7 @@ function playRound() {
             userScore.innerHTML = playerScore;
             playerState.classList.toggle('win');
             if (playerScore === 5) {
-                result.innerHTML = ('Congratulations! You have beat the computer 5 to ' + computerScore + '.')
+                result.innerHTML = (`Congratulations! <br>You beat the computer 5 to ` + computerScore + '.')
             } else {
                 result.innerHTML = ('You win, ' + playerSelection + ' beats ' + computerSelection + '.')
             }
@@ -71,7 +71,7 @@ function playRound() {
         cpuScore.innerHTML = computerScore;
         cpuState.classList.toggle('win')
         if (computerScore === 5) {
-            result.innerHTML = ('Bummer! You have lost to the computer 5 to ' + playerScore + '.')
+            result.innerHTML = (`Bummer! <br>You lost to the computer 5 to ` + playerScore + '.')
         } else {
              result.innerHTML = ('You lose, ' + computerSelection + ' beats ' + playerSelection + '.')
         }

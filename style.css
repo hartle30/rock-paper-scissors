@@ -106,7 +106,7 @@ button {
     min-width: 128px;
     font-size: 72px;
     text-align: center;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 .win {

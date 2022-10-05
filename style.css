@@ -102,9 +102,11 @@ h2 {
 }
 
 button {
-    height: 64px;
-    width: 64px;
-    font-size: 48px;
+    min-height: 128px;
+    min-width: 128px;
+    font-size: 72px;
+    text-align: center;
+    border-radius: 5px;
 }
 
 .win {
